@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jw3126/CurryPipe.jl.svg?branch=master)](https://travis-ci.org/jw3126/CurryPipe.jl)
+
 # CurryPipe
 
 Usage
