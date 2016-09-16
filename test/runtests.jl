@@ -31,9 +31,15 @@ end
     @test :(x |> g(y))         |> curry == :(g(y,x))
     @test :( f(x) |> g(y, z))  |> curry == :(g(y,z,f(x)))
     @test :(3 |> sin |> +(2))  |> curry == :(2 + sin(3))
+
+    @testset "curry _" begin
+        @test :(x |> f(_, y)) |> curry == :(f(x,y))
+        @test :(x |> f(a, _, _) |> g(_, z)) |> curry == :(g(f(a,x,x),z))
+    end
 end
 
-@testset "@curry" begin
+@testset "@curry, @c" begin
     @test macroexpand(:(@curry x |> f(y) |> g(z))) == :(g(z,f(y,x)))
     @test 5 == @curry 2 |> +(3)
+    @test (2+1) * (2+1) == @c 2 |> _ + 1 |> _ * _
 end
